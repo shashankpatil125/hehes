@@ -15,6 +15,23 @@ export default defineConfig({
           'ngrok-skip-browser-warning': 'true',
         },
       },
+      '/campaign-api': {
+        target: 'https://moonily-straticulate-jammie.ngrok-free.dev',
+        changeOrigin: true,
+        secure: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      },
+      // Proxy for student risk analysis to avoid CORS in the browser
+      '/students': {
+        target: 'https://maurita-affine-elouise.ngrok-free.dev',
+        changeOrigin: true,
+        secure: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      },
     },
   },
 })

@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom'
+
 interface NavbarProps {
-  onTakeQuizClick: () => void
+  onTakeQuizClick?: () => void
 }
 
 export default function Navbar({ onTakeQuizClick }: NavbarProps) {
+  const navigate = useNavigate()
+
   return (
     <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 lg:px-0 flex items-center justify-between py-5">
@@ -24,10 +28,16 @@ export default function Navbar({ onTakeQuizClick }: NavbarProps) {
         <div className="flex items-center gap-3">
           <button
             className="hidden md:inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 transition"
-            onClick={onTakeQuizClick}
+          onClick={() => onTakeQuizClick?.()}
           >
             Take quiz
           </button>
+        <button
+          className="hidden sm:inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 transition"
+          onClick={() => navigate('/admin')}
+        >
+          Admin
+        </button>
           <button className="hidden sm:inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 transition">
             Book a demo
           </button>
