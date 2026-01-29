@@ -25,7 +25,7 @@ export default defineConfig({
       },
       // Proxy for student risk analysis to avoid CORS in the browser
       '/students': {
-        target: 'https://maurita-affine-elouise.ngrok-free.dev',
+        target: 'https://maurita-affine-elouise.ngrok-free.dev', 
         changeOrigin: true,
         secure: true,
         headers: {

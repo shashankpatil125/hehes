@@ -87,10 +87,16 @@ export default function RiskAnalysisPanel() {
               const anyResult = result as any
               const risk: string | null =
                 typeof anyResult?.dropout_risk === 'string' ? anyResult.dropout_risk : null
-              const explanationContent: string | null =
-                typeof anyResult?.explanation?.choices?.[0]?.message?.content === 'string'
-                  ? anyResult.explanation.choices[0].message.content
-                  : null
+              
+              // Handle both response formats:
+              // 1. New format: explanation is a direct string
+              // 2. Old format: explanation.choices[0].message.content
+              let explanationContent: string | null = null
+              if (typeof anyResult?.explanation === 'string') {
+                explanationContent = anyResult.explanation
+              } else if (typeof anyResult?.explanation?.choices?.[0]?.message?.content === 'string') {
+                explanationContent = anyResult.explanation.choices[0].message.content
+              }
 
               let badgeClasses =
                 'inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold'
@@ -116,7 +122,7 @@ export default function RiskAnalysisPanel() {
                   )}
 
                   {explanationContent && (
-                    <div className="text-xs sm:text-sm leading-normal whitespace-pre-wrap">
+                    <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
                       {(() => {
                         // Parse **text** into bold formatting
                         const parts = explanationContent.split(/(\*\*.*?\*\*)/g)

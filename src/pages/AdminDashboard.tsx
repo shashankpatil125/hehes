@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
 import Navbar from '../components/Navbar'
+import OnboardingProcessPanel from '../components/admin/OnboardingProcessPanel'
 import RiskAnalysisPanel from '../components/admin/RiskAnalysisPanel'
 import ViewAnalyticsPanel from '../components/admin/ViewAnalyticsPanel'
 
-type DashboardTabKey = 'analytics' | 'risk'
+type DashboardTabKey = 'analytics' | 'risk' | 'onboarding'
 
 function MusicIcon(props: { className?: string }) {
   return (
@@ -42,6 +43,25 @@ function VideoIcon(props: { className?: string }) {
   )
 }
 
+function UserCheckIcon(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={props.className}
+      aria-hidden="true"
+    >
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="m16 11 2 2 4-4" />
+    </svg>
+  )
+}
+
 export default function AdminDashboard() {
   const tabs = useMemo(
     () =>
@@ -55,6 +75,11 @@ export default function AdminDashboard() {
           key: 'risk' as const,
           label: 'Risk analysis',
           Icon: VideoIcon,
+        },
+        {
+          key: 'onboarding' as const,
+          label: 'Onboarding process',
+          Icon: UserCheckIcon,
         },
       ] as const,
     [],
@@ -100,11 +125,9 @@ export default function AdminDashboard() {
         </div>
 
         <div className="mt-8">
-          {activeTab === 'analytics' ? (
-            <ViewAnalyticsPanel />
-          ) : (
-            <RiskAnalysisPanel />
-          )}
+          {activeTab === 'analytics' && <ViewAnalyticsPanel />}
+          {activeTab === 'risk' && <RiskAnalysisPanel />}
+          {activeTab === 'onboarding' && <OnboardingProcessPanel />}
         </div>
       </div>
     </div>
