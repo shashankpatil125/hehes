@@ -19,7 +19,6 @@ export default function RiskAnalysisPanel() {
     setResult(null)
 
     try {
-      // Use the Vite proxy: /students/* → https://maurita-affine-elouise.ngrok-free.dev/*
       const url = `/students/${trimmed}`
       const res = await fetch(url, {
         method: 'GET',

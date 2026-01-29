@@ -17,7 +17,7 @@ export default function ViewAnalyticsPanel() {
     try {
       const payload = { question: trimmed }
       const res = await fetch(
-        'https://moonily-straticulate-jammie.ngrok-free.dev/campaign-recommendations',
+        '/campaign-api/campaign-recommendations',
         {
           method: 'POST',
           headers: {

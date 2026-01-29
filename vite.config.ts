@@ -19,6 +19,7 @@ export default defineConfig({
         target: 'https://moonily-straticulate-jammie.ngrok-free.dev',
         changeOrigin: true,
         secure: true,
+        rewrite: (path) => path.replace(/^\/campaign-api/, ''),
         headers: {
           'ngrok-skip-browser-warning': 'true',
         },
