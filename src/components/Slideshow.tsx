@@ -20,7 +20,7 @@ export default function Slideshow({ currentSlide, onSlideChange }: SlideshowProp
           </p>
           <p className="text-sm text-slate-600 leading-relaxed mb-6 max-w-lg">
             Magic Bus tackles poverty-related issues affecting young people in underserved communities with
-            programmes that improve education, build life skills and connect youth to sustainable livelihoods. [source](https://www.magicbus.org/#)
+            programmes that improve education, build life skills and connect youth to sustainable livelihoods.
           </p>
           <p className="text-xs text-slate-500">
             The highlights on the right rotate automatically every 3 seconds.
