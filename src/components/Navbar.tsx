@@ -38,11 +38,17 @@ export default function Navbar({ onTakeQuizClick }: NavbarProps) {
         >
           Admin
         </button>
+        <button
+          className="hidden sm:inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 transition"
+          onClick={() => navigate('/onboarding')}
+        >
+          Onboarding
+        </button>
           <button
             className="hidden sm:inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 transition"
-            onClick={() => navigate('/onboarding')}
+            onClick={() => navigate('/user')}
           >
-            Onboarding
+            User
           </button>
           <button className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition">
             English
