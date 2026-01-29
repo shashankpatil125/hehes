@@ -1,3 +1,5 @@
+import aboutMagicBusImage from '../assets/about-magic-bus.jpg'
+
 export default function Hero() {
   return (
     <div className="max-w-6xl mx-auto px-4 lg:px-0 py-12 lg:py-20 grid lg:grid-cols-2 gap-12 items-center">
@@ -61,17 +63,14 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Right column: illustration placeholder */}
+      {/* Right column: image */}
       <section className="relative">
-        <div className="rounded-[32px] border border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)] px-8 py-10 lg:px-10 lg:py-12">
-          <div className="h-64 sm:h-72 lg:h-80 grid place-items-center">
-            <div className="relative w-full max-w-sm aspect-[4/3] rounded-3xl border border-slate-200 bg-slate-50 overflow-hidden">
-              <div className="absolute inset-6 rounded-2xl border border-dashed border-slate-200" />
-              <div className="absolute left-8 top-8 h-10 w-32 rounded-2xl bg-white shadow-sm border border-slate-200" />
-              <div className="absolute right-10 top-16 h-20 w-40 rounded-2xl bg-white shadow-sm border border-slate-200" />
-              <div className="absolute left-10 bottom-10 h-16 w-40 rounded-2xl bg-white shadow-sm border border-slate-200" />
-            </div>
-          </div>
+        <div className="rounded-[32px] border border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)] overflow-hidden">
+          <img
+            src={aboutMagicBusImage}
+            alt="Magic Bus - Children and community members making peace signs"
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
     </div>
