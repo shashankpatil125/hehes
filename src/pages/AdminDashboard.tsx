@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import OnboardingProcessPanel from '../components/admin/OnboardingProcessPanel'
 import RiskAnalysisPanel from '../components/admin/RiskAnalysisPanel'
 import ViewAnalyticsPanel from '../components/admin/ViewAnalyticsPanel'
 
-type DashboardTabKey = 'analytics' | 'risk' | 'onboarding'
+type DashboardTabKey = 'analytics' | 'risk'
 
 function MusicIcon(props: { className?: string }) {
   return (
@@ -43,25 +43,6 @@ function VideoIcon(props: { className?: string }) {
   )
 }
 
-function UserCheckIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={props.className}
-      aria-hidden="true"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="m16 11 2 2 4-4" />
-    </svg>
-  )
-}
-
 export default function AdminDashboard() {
   const tabs = useMemo(
     () =>
@@ -76,16 +57,26 @@ export default function AdminDashboard() {
           label: 'Risk analysis',
           Icon: VideoIcon,
         },
-        {
-          key: 'onboarding' as const,
-          label: 'Onboarding process',
-          Icon: UserCheckIcon,
-        },
       ] as const,
     [],
   )
 
-  const [activeTab, setActiveTab] = useState<DashboardTabKey>('analytics')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tabFromUrl = searchParams.get('tab') as DashboardTabKey | null
+  const [activeTab, setActiveTab] = useState<DashboardTabKey>(
+    tabFromUrl && ['analytics', 'risk'].includes(tabFromUrl) ? tabFromUrl : 'analytics',
+  )
+
+  useEffect(() => {
+    if (tabFromUrl && ['analytics', 'risk'].includes(tabFromUrl)) {
+      setActiveTab(tabFromUrl)
+    }
+  }, [tabFromUrl])
+
+  const handleTabChange = (tab: DashboardTabKey) => {
+    setActiveTab(tab)
+    setSearchParams({ tab })
+  }
 
   return (
     <div className="min-h-screen bg-[#f5f7fb] text-slate-900 flex flex-col">
@@ -108,7 +99,7 @@ export default function AdminDashboard() {
               <button
                 key={key}
                 type="button"
-                onClick={() => setActiveTab(key)}
+                onClick={() => handleTabChange(key)}
                 className={[
                   'flex-1 inline-flex items-center justify-center gap-3 rounded-2xl px-5 py-4 text-sm sm:text-base font-semibold transition',
                   isActive
@@ -127,7 +118,6 @@ export default function AdminDashboard() {
         <div className="mt-8">
           {activeTab === 'analytics' && <ViewAnalyticsPanel />}
           {activeTab === 'risk' && <RiskAnalysisPanel />}
-          {activeTab === 'onboarding' && <OnboardingProcessPanel />}
         </div>
       </div>
     </div>
